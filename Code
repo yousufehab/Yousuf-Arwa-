@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Youssef & Arwa 🤍</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:Georgia, "Times New Roman", serif;
+    color:#5b303b;
+    background:
+        radial-gradient(circle at center,#fffaf8 0%,#f9e5e8 45%,#dfb7c2 100%);
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+    position:relative;
+}
+
+.content{
+    position:relative;
+    z-index:5;
+    max-width:850px;
+    opacity:0;
+    animation:showContent 2s ease 2.2s forwards;
+}
+
+.small-title{
+    font-size:15px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    opacity:.65;
+    margin-bottom:24px;
+}
+
+h1{
+    font-size:clamp(55px,11vw,110px);
+    font-weight:400;
+    line-height:1;
+    margin-bottom:20px;
+    text-shadow:0 5px 25px rgba(100,50,70,.12);
+}
+
+.ampersand{
+    color:#b76a7b;
+    font-style:italic;
+}
+
+.date{
+    font-size:clamp(20px,4vw,32px);
+    letter-spacing:6px;
+    margin-bottom:28px;
+}
+
+.message{
+    font-size:clamp(17px,3vw,24px);
+    line-height:1.8;
+    font-style:italic;
+    max-width:680px;
+    margin:auto;
+}
+
+.story{
+    margin-top:12px;
+    font-size:14px;
+    letter-spacing:3px;
+    opacity:.55;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:13px;
+    margin-top:38px;
+    flex-wrap:wrap;
+}
+
+.time-box{
+    min-width:92px;
+    padding:15px 10px;
+    border-radius:20px;
+
+    background:rgba(255,255,255,.5);
+    border:1px solid rgba(150,90,105,.16);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 10px 35px rgba(100,50,70,.10);
+}
+
+.number{
+    display:block;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.label{
+    display:block;
+    margin-top:5px;
+    font-size:9px;
+    letter-spacing:2px;
+    opacity:.65;
+}
+
+/* =========================
+   CURTAINS
+========================= */
+
+.curtain-container{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    pointer-events:none;
+}
+
+.curtain{
+    width:50%;
+    height:100%;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.04) 0px,
+            rgba(255,255,255,.04) 10px,
+            rgba(0,0,0,.08) 22px,
+            rgba(255,255,255,.03) 38px
+        ),
+        linear-gradient(
+            90deg,
+            #391522,
+            #69283d 25%,
+            #8d3c55 50%,
+            #64243a 75%,
+            #37131f
+        );
+
+    box-shadow:
+        inset 0 0 100px rgba(0,0,0,.5);
+}
+
+.curtain-left{
+    animation:openLeft 2.7s cubic-bezier(.77,0,.18,1) 1.2s forwards;
+}
+
+.curtain-right{
+    animation:openRight 2.7s cubic-bezier(.77,0,.18,1) 1.2s forwards;
+}
+
+.curtain-text{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    font-size:20px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    white-space:nowrap;
+    animation:
+        curtainText 2.2s ease forwards,
+        hideText .3s ease 2.1s forwards;
+}
+
+/* =========================
+   STARS
+========================= */
+
+.stars{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:white;
+    opacity:.45;
+    animation:twinkle 3s infinite alternate;
+}
+
+.star:nth-child(1){left:8%;top:18%;animation-delay:.2s}
+.star:nth-child(2){left:17%;top:70%;animation-delay:1s}
+.star:nth-child(3){left:28%;top:25%;animation-delay:1.7s}
+.star:nth-child(4){left:42%;top:12%;animation-delay:.5s}
+.star:nth-child(5){left:58%;top:78%;animation-delay:1.4s}
+.star:nth-child(6){left:70%;top:20%;animation-delay:.8s}
+.star:nth-child(7){left:82%;top:62%;animation-delay:2s}
+.star:nth-child(8){left:92%;top:30%;animation-delay:1.2s}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:2;
+}
+
+.heart{
+    position:absolute;
+    bottom:-40px;
+    color:#b96b7d;
+    opacity:0;
+    font-size:20px;
+    animation:floatUp linear infinite;
+}
+
+.heart:nth-child(1){
+    left:8%;
+    animation-duration:10s;
+    animation-delay:1s;
+}
+
+.heart:nth-child(2){
+    left:23%;
+    animation-duration:13s;
+    animation-delay:4s;
+}
+
+.heart:nth-child(3){
+    left:43%;
+    animation-duration:11s;
+    animation-delay:2s;
+}
+
+.heart:nth-child(4){
+    left:64%;
+    animation-duration:14s;
+    animation-delay:5s;
+}
+
+.heart:nth-child(5){
+    left:82%;
+    animation-duration:12s;
+    animation-delay:3s;
+}
+
+.heart:nth-child(6){
+    left:93%;
+    animation-duration:15s;
+    animation-delay:7s;
+}
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+.music-button{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:20;
+
+    width:56px;
+    height:56px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.62);
+    backdrop-filter:blur(12px);
+
+    color:#7b3b4d;
+    font-size:21px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 25px rgba(70,35,50,.15);
+
+    transition:.3s;
+}
+
+.music-button:hover{
+    transform:scale(1.1);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes openLeft{
+    from{transform:translateX(0)}
+    to{transform:translateX(-100%)}
+}
+
+@keyframes openRight{
+    from{transform:translateX(0)}
+    to{transform:translateX(100%)}
+}
+
+@keyframes curtainText{
+    0%{opacity:0}
+    20%{opacity:1}
+    70%{opacity:1}
+    100%{opacity:0}
+}
+
+@keyframes hideText{
+    to{visibility:hidden}
+}
+
+@keyframes showContent{
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.55;
+    }
+
+    90%{
+        opacity:.35;
+    }
+
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.15;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:.9;
+        transform:scale(1.5);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .small-title{
+        font-size:11px;
+        letter-spacing:3px;
+    }
+
+    .date{
+        letter-spacing:3px;
+    }
+
+    .message{
+        font-size:17px;
+    }
+
+    .countdown{
+        gap:7px;
+    }
+
+    .time-box{
+        min-width:72px;
+        padding:12px 6px;
+    }
+
+    .number{
+        font-size:24px;
+    }
+
+    .label{
+        font-size:8px;
+    }
+
+    .curtain-text{
+        font-size:13px;
+        letter-spacing:3px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     CURTAIN
+========================= -->
+
+<div class="curtain-container">
+
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+
+    <div class="curtain-text">
+        A little story begins...
+    </div>
+
+</div>
+
+
+<!-- =========================
+     STARS
+========================= -->
+
+<div class="stars">
+
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+
+</div>
+
+
+<!-- =========================
+     HEARTS
+========================= -->
+
+<div class="hearts">
+
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♥</div>
+    <div class="heart">♡</div>
+    <div class="heart">♥</div>
+    <div class="heart">♡</div>
+
+</div>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="page">
+
+    <div class="content">
+
+        <div class="small-title">
+            With love, from two hearts
+        </div>
+
+
+        <h1>
+            Youssef
+            <span class="ampersand">&</span>
+            Arwa
+        </h1>
+
+
+        <div class="date">
+            16 · 10 · 2026
+        </div>
+
+
+        <p class="message">
+            We fall in love in October.
+            <br>
+            And on this beautiful day,
+            a new chapter begins...
+        </p>
+
+
+        <div class="story">
+            بِسْمِ اللَّهِ نَبْدَأُ حِكَايَتَنَا 🤍
+        </div>
+
+
+        <!-- COUNTDOWN -->
+
+        <div class="countdown">
+
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">DAYS</span>
+            </div>
+
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">HOURS</span>
+            </div>
+
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">MINUTES</span>
+            </div>
+
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">SECONDS</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     MUSIC
+========================= -->
+
+<button class="music-button" id="musicButton">
+    ♫
+</button>
+
+
+<script>
+
+/* =====================================
+   COUNTDOWN
+===================================== */
+
+/*
+   موعد قراية الفاتحة:
+   16 October 2026 - 8:00 PM
+*/
+
+const targetDate =
+    new Date("October 16, 2026 20:00:00").getTime();
+
+
+function updateCountdown(){
+
+    const now =
+        new Date().getTime();
+
+    const distance =
+        targetDate - now;
+
+
+    if(distance <= 0){
+
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(
+            distance /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (distance %
+            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (distance %
+            (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+
+    const seconds =
+        Math.floor(
+            (distance %
+            (1000 * 60)) /
+            1000
+        );
+
+
+    document.getElementById("days")
+        .textContent =
+        String(days).padStart(2,"0");
+
+
+    document.getElementById("hours")
+        .textContent =
+        String(hours).padStart(2,"0");
+
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds).padStart(2,"0");
+}
+
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+/* =====================================
+   ROMANTIC MUSIC ENGINE
+===================================== */
+
+let audioContext = null;
+let master = null;
+let musicTimer = null;
+let playing = false;
+
+
+const notes = {
+
+    C3:130.81,
+    D3:146.83,
+    E3:164.81,
+    F3:174.61,
+    G3:196.00,
+    A3:220.00,
+
+    C4:261.63,
+    D4:293.66,
+    E4:329.63,
+    F4:349.23,
+    G4:392.00,
+    A4:440.00,
+    B4:493.88,
+
+    C5:523.25,
+    D5:587.33,
+    E5:659.25,
+    F5:698.46,
+    G5:783.99,
+    A5:880.00
+};
+
+
+/* -------------------------------------
+   Piano
+------------------------------------- */
+
+function piano(note,duration,time){
+
+    const osc =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+
+    osc.type = "triangle";
+
+    osc.frequency.value =
+        notes[note];
+
+
+    gain.gain.setValueAtTime(
+        0.001,
+        time
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.14,
+        time + 0.025
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        time + duration
+    );
+
+
+    osc.connect(gain);
+
+    gain.connect(master);
+
+
+    osc.start(time);
+
+    osc.stop(
+        time + duration + .1
+    );
+}
+
+
+/* -------------------------------------
+   Strings
+------------------------------------- */
+
+function strings(note,duration,time){
+
+    const osc1 =
+        audioContext.createOscillator();
+
+    const osc2 =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+
+    osc1.type = "sine";
+    osc2.type = "sine";
+
+
+    osc1.frequency.value =
+        notes[note];
+
+    osc2.frequency.value =
+        notes[note] * 1.005;
+
+
+    gain.gain.setValueAtTime(
+        0.001,
+        time
+    );
+
+
+    gain.gain.linearRampToValueAtTime(
+        0.035,
+        time + .5
+    );
+
+
+    gain.gain.linearRampToValueAtTime(
+        0.001,
+        time + duration
+    );
+
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+
+    gain.connect(master);
+
+
+    osc1.start(time);
+    osc2.start(time);
+
+
+    osc1.stop(
+        time + duration
+    );
+
+    osc2.stop(
+        time + duration
+    );
+}
+
+
+/* -------------------------------------
+   Ambient Pad
+------------------------------------- */
+
+function pad(chord,duration,time){
+
+    chord.forEach(note => {
+
+        const osc =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+
+        osc.type = "sine";
+
+        osc.frequency.value =
+            notes[note];
+
+
+        gain.gain.setValueAtTime(
+            .001,
+            time
+        );
+
+
+        gain.gain.linearRampToValueAtTime(
+            .018,
+            time + 1
+        );
+
+
+        gain.gain.linearRampToValueAtTime(
+            .001,
+            time + duration
+        );
+
+
+        osc.connect(gain);
+
+        gain.connect(master);
+
+
+        osc.start(time);
+
+        osc.stop(
+            time + duration
+        );
+
+    });
+}
+
+
+/* -------------------------------------
+   Melody
+------------------------------------- */
+
+const melody = [
+
+    ["A4",.45],
+    ["C5",.45],
+    ["E5",.75],
+
+    ["D5",.45],
+    ["C5",.45],
+    ["A4",.8],
+
+    ["G4",.45],
+    ["B4",.45],
+    ["D5",.75],
+
+    ["C5",.45],
+    ["B4",.45],
+    ["G4",.8],
+
+    ["A4",.45],
+    ["C5",.45],
+    ["E5",.75],
+
+    ["F5",.45],
+    ["E5",.45],
+    ["C5",.8],
+
+    ["D5",.45],
+    ["C5",.45],
+    ["A4",1.1]
+
+];
+
+
+/* -------------------------------------
+   Chords
+------------------------------------- */
+
+const chords = [
+
+    ["A3","C4","E4"],
+    ["F3","A3","C4"],
+    ["G3","B4","D4"],
+    ["C3","E3","G3"]
+
+];
+
+
+/* -------------------------------------
+   Music Loop
+------------------------------------- */
+
+function playMusic(){
+
+    let time =
+        audioContext.currentTime + .15;
+
+
+    let chordIndex = 0;
+
+
+    melody.forEach(
+        ([note,duration],index) => {
+
+            piano(
+                note,
+                duration,
+                time
+            );
+
+
+            strings(
+                note,
+                duration + .5,
+                time
+            );
+
+
+            if(index % 6 === 0){
+
+                pad(
+                    chords[chordIndex],
+                    3.5,
+                    time
+                );
+
+
+                chordIndex =
+                    (chordIndex + 1)
+                    % chords.length;
+            }
+
+
+            time += duration;
+
+        }
+    );
+
+
+    musicTimer =
+        setTimeout(
+            playMusic,
+            (time -
+            audioContext.currentTime)
+            * 1000
+        );
+}
+
+
+/* -------------------------------------
+   Start
+------------------------------------- */
+
+function startMusic(){
+
+    audioContext =
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+
+    master =
+        audioContext.createGain();
+
+
+    master.gain.value = .75;
+
+
+    master.connect(
+        audioContext.destination
+    );
+
+
+    playMusic();
+
+
+    playing = true;
+
+    document.getElementById(
+        "musicButton"
+    ).textContent = "❚❚";
+}
+
+
+/* -------------------------------------
+   Stop
+------------------------------------- */
+
+function stopMusic(){
+
+    clearTimeout(
+        musicTimer
+    );
+
+
+    if(audioContext){
+
+        audioContext.close();
+
+        audioContext = null;
+    }
+
+
+    playing = false;
+
+
+    document.getElementById(
+        "musicButton"
+    ).textContent = "♫";
+}
+
+
+/* -------------------------------------
+   Music Button
+------------------------------------- */
+
+document
+.getElementById("musicButton")
+.addEventListener(
+    "click",
+    () => {
+
+        if(!playing){
+
+            startMusic();
+
+        }else{
+
+            stopMusic();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
